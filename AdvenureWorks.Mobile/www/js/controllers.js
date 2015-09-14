@@ -2,6 +2,9 @@ angular.module('adventureWorksApp.controllers', [])
 
 .controller('DashCtrl', function ($scope) { })
 
+.controller('signupCtrl', function ($scope) { })
+.controller('forgotPasswordCtrl', function ($scope) { })
+
 .controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state) {
     $scope.authorization = {
         username: '',
