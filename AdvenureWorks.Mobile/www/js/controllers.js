@@ -2,10 +2,24 @@ angular.module('adventureWorksApp.controllers', [])
 
 .controller('DashCtrl', function ($scope) { })
 
-.controller('loginCtrl', function ($scope) {
+.controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state) {
+    $scope.authorization = {
+        username: '',
+        password: ''
+    };
+
+    $scope.signIn = function (form) {
+        $state.go('tab.dash');
+        //if (form.$valid) {
+        //    // perform the validation here
+        //    $state.go('tab.dash');
+        //}
+    };
+
     $scope.settings = {
         enableFriends: true
     };
+      
 })
 
 
