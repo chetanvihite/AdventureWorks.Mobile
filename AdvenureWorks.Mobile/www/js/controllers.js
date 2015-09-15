@@ -1,6 +1,15 @@
 angular.module('adventureWorksApp.controllers', [])
 
-.controller('DashCtrl', function ($scope) { })
+.controller('DashCtrl', function ($scope) {
+    $scope.orderPref = {
+        clientName: 'Chetan Vihite',
+        addressline1: 'A 403, Leisure Apts',
+        addressline2: 'behind maratha mandir',
+        city: 'Pune',
+        state: 'Maharashtra'
+    };
+
+})
 
 .controller('signupCtrl', function ($scope) { })
 .controller('forgotPasswordCtrl', function ($scope) {

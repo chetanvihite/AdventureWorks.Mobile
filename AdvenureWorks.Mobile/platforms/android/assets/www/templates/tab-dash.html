@@ -1,28 +1,90 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
-    <div class="list card">
-      <div class="item item-divider">Place an Order</div>
-      <div class="item item-body">
-        <div>
-          There is a fire in <b>sector 3</b>
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Health</div>
-      <div class="item item-body">
-        <div>
-          You ate an apple today!
-        </div>
-      </div>
-    </div>
-    <div class="list card">
-      <div class="item item-divider">Upcoming</div>
-      <div class="item item-body">
-        <div>
-          You have <b>29</b> meetings on your calendar tomorrow.
-        </div>
-      </div>
-    </div>
-  </ion-content>
+      <div class="list card">
+          <div class="item item-divider">Place an Order</div>
+          <div>
+              <form name="orderForm" novalidate="" ng-submit="submitOrder(orderForm)">
+                  <div class="item item-body">
+
+                      <div class="list">
+
+                          <label class="item item-input item-select">
+                              <div class="input-label">
+                                  <b>Pick up schedule</b>
+                              </div>
+                              <select>
+                                  <option selected>8 AM to 11 AM </option>
+                                  <option>11 AM to 2 PM</option>
+                                  <option>2 PM to 6 PM</option>
+                                  <option>6 PM to 9 PM</option>
+                              </select>
+                          </label>
+
+                      </div>
+
+                      <label class="item item-input" ng-class="{ 'has-errors' : orderForm.addressline1.$invalid && orderForm.$submitted, 'no-errors' : orderForm.addressline1.$valid  && orderForm.$submitted}">
+                          <span class="input-label"><span class="assertive">*</span>Street Address:</span>
+                          <input type="text" name="addressline1" ng-model="orderPref.addressline1" ng-minlength="1" ng-maxlength="100" required>
+                      </label>
+                      <div class="error-container last-error-container" ng-show="orderForm.addressline1.$error && orderForm.$submitted" ng-messages="orderForm.addressline1.$error">
+                          <div ng-messages-include="error-list.html"></div>
+                      </div>
+
+                      <label class="item item-input">
+                          <span class="input-label">Landmark:</span>
+                          <input type="text" name="addressline2" ng-model="orderPref.addressline2">
+                      </label>
+
+                      <label class="item item-input" ng-class="{ 'has-errors' : orderForm.city.$invalid && orderForm.$submitted, 'no-errors' : orderForm.city.$valid  && orderForm.$submitted}">
+                          <span class="input-label"><span class="assertive">*</span> City:</span>
+                          <input type="text" name="city" ng-model="orderPref.city" ng-minlength="1" ng-maxlength="50" required>
+                      </label>
+                      <div class="error-container last-error-container" ng-show="orderForm.city.$error && orderForm.$submitted" ng-messages="orderForm.city.$error">
+                          <div ng-messages-include="error-list.html"></div>
+                      </div>
+
+                      <label class="item item-input" ng-class="{ 'has-errors' : orderForm.state.$invalid && orderForm.$submitted, 'no-errors' : orderForm.state.$valid  && orderForm.$submitted}">
+                          <span class="input-label"><span class="assertive">*</span> State:</span>
+                          <input type="text" name="state" ng-model="orderPref.state" ng-minlength="1" ng-maxlength="50" required>
+                      </label>
+                      <div class="error-container last-error-container" ng-show="orderForm.state.$error && orderForm.$submitted" ng-messages="orderForm.state.$error">
+                          <div ng-messages-include="error-list.html"></div>
+                      </div>
+
+                      <label class="item item-input" ng-class="{ 'has-errors' : orderForm.zip.$invalid && orderForm.$submitted, 'no-errors' : orderForm.zip.$valid  && orderForm.$submitted}">
+                          <span class="input-label"><span class="assertive">*</span> Pincode:</span>
+                          <input type="text" name="zip" ng-model="orderPref.zip" ng-minlength="6" ng-maxlength="6" required>
+                      </label>
+                      <div class="error-container last-error-container" ng-show="orderForm.zip.$error && orderForm.$submitted" ng-messages="orderForm.zip.$error">
+                          <div ng-messages-include="error-list.html"></div>
+                      </div>
+
+                                         
+                      <div>
+                          <div class="list">
+
+                              <label class="item item-input item-select">
+                                  <div class="input-label">
+                                      <b>Delivery option</b>
+                                  </div>
+                                  <select>
+                                      <option selected>Standard</option>
+                                      <option>Expedite</option>
+                                  </select>
+                              </label>
+
+                          </div>
+                      </div>
+                      <div>
+                          <button class="button button-full button-positive" type="submit">
+                              Order Pickup
+                          </button>
+                      </div>
+                  </div>
+                  </form>
+             
+          </div>
+          </div>
+
+</ion-content>
 </ion-view>
