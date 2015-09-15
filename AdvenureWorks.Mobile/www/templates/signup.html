@@ -1,4 +1,128 @@
-﻿<ion-view view-title="Signup">
+﻿
+
+<ion-view view-title="Signup">
     <ion-content class="padding">
+     
+        <div>
+            <h5>
+                <span class="positive"> Enter following information to get started</span>
+            </h5>
+        </div>
+                <div>
+                    <form name="signupForm" novalidate="" ng-submit="signup(signupForm)">
+
+                        <div class="list">
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.firstName.$invalid && signupForm.$submitted, 'no-errors' : signupForm.firstName.$valid}">
+                                <span class="input-label"><span class="assertive">*</span> First Name:</span>
+                                <input type="text" class="positive" name="firstName" ng-model="signup.firstName" ng-minlength="1" ng-maxlength="20" required autofocus>
+                            </label>
+                            <div class="error-container" ng-show="signupForm.firstName.$error && signupForm.$submitted" ng-messages="signupForm.firstName.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.lastName.$invalid && signupForm.$submitted, 'no-errors' : signupForm.lastName.$valid}">
+                                <span class="input-label"><span class="assertive">*</span> Last Name:</span>
+                                <input type="text" name="lastName" ng-model="signup.lastName" ng-minlength="1" ng-maxlength="20" required>
+                            </label>
+                            <div class="error-container" ng-show="signupForm.lastName.$error && signupForm.$submitted" ng-messages="signupForm.lastName.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.mobileNumber.$invalid && signupForm.$submitted, 'no-errors' : signupForm.mobileNumber.$valid}">
+                                <span class="input-label"><span class="assertive">*</span> Mobile Number:</span>
+                                <input type="text" name="mobileNumber" ng-model="signup.mobileNumber" ng-minlength="10" ng-maxlength="10" required >
+                            </label>
+                            <div class="error-container" ng-show="signupForm.mobileNumber.$error && signupForm.$submitted" ng-messages="signupForm.mobileNumber.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.emailAddress.$invalid && signupForm.$submitted, 'no-errors' : signupForm.emailAddress.$valid}">
+                                <span class="input-label"><span class="assertive">*</span> Email Address:</span>
+                                <input type="text" name="emailAddress" ng-model="signup.emailAddress" ng-minlength="5" ng-maxlength="50" required>
+                            </label>
+                            <div class="error-container" ng-show="signupForm.emailAddress.$error && signupForm.$submitted" ng-messages="signupForm.emailAddress.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.password.$invalid && signupForm.$submitted, 'no-errors' : signupForm.password.$valid  && signupForm.$submitted}">
+                                <span class="input-label"><span class="assertive">*</span> Password:</span>
+                                <input type="password" name="password" ng-model="signup.password" ng-minlength="6" ng-maxlength="20" required>
+                            </label>
+                            <div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.confirmPassword.$invalid && signupForm.$submitted, 'no-errors' : signupForm.confirmPassword.$valid  && signupForm.$submitted}">
+                                <span class="input-label"><span class="assertive">*</span> Confirm Password:</span>
+                                <input type="password" name="confirmPassword" ng-model="signup.confirmPassword" ng-minlength="6" ng-maxlength="20" required>
+                            </label>
+                            <div class="error-container last-error-container" ng-show="signupForm.password.$error && signupForm.$submitted" ng-messages="signupForm.password.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.addressline1.$invalid && signupForm.$submitted, 'no-errors' : signupForm.addressline1.$valid  && signupForm.$submitted}">
+                                <span class="input-label"><span class="assertive">*</span> Address Line 1:</span>
+                                <input type="text" name="addressline1" ng-model="signup.addressline1" ng-minlength="1" ng-maxlength="100" required>
+                            </label>
+                            <div class="error-container last-error-container" ng-show="signupForm.addressline1.$error && signupForm.$submitted" ng-messages="signupForm.addressline1.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input">
+                                <span class="input-label">Address Line 2:</span>
+                                <input type="text" name="addressline2" ng-model="signup.addressline2">
+                            </label>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.city.$invalid && signupForm.$submitted, 'no-errors' : signupForm.city.$valid  && signupForm.$submitted}">
+                                <span class="input-label"><span class="assertive">*</span> City:</span>
+                                <input type="text" name="city" ng-model="signup.city" ng-minlength="1" ng-maxlength="50" required>
+                            </label>
+                            <div class="error-container last-error-container" ng-show="signupForm.city.$error && signupForm.$submitted" ng-messages="signupForm.city.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.state.$invalid && signupForm.$submitted, 'no-errors' : signupForm.state.$valid  && signupForm.$submitted}">
+                                <span class="input-label"><span class="assertive">*</span> State:</span>
+                                <input type="text" name="state" ng-model="signup.state" ng-minlength="1" ng-maxlength="50" required>
+                            </label>
+                            <div class="error-container last-error-container" ng-show="signupForm.state.$error && signupForm.$submitted" ng-messages="signupForm.state.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                            <label class="item item-input" ng-class="{ 'has-errors' : signupForm.zip.$invalid && signupForm.$submitted, 'no-errors' : signupForm.zip.$valid  && signupForm.$submitted}">
+                                <span class="input-label"><span class="assertive">*</span> Zip:</span>
+                                <input type="text" name="zip" ng-model="signup.zip" ng-minlength="6" ng-maxlength="6" required>
+                            </label>
+                            <div class="error-container last-error-container" ng-show="signupForm.zip.$error && signupForm.$submitted" ng-messages="signupForm.zip.$error">
+                                <div ng-messages-include="error-list.html"></div>
+                            </div>
+
+                        </div>
+                        <div>
+                            <button class="button button-full button-positive" type="submit">
+                                Create My Account
+                            </button>
+                        </div>
+                    </form>   
+                </div>
+               
+
 </ion-content>
 </ion-view>
+
+
+<script id="error-list.html" type="text/ng-template">
+    <div class="error" ng-message="required">
+        <i class="ion-information-circled"></i>
+        This field is required!
+    </div>
+    <div class="error" ng-message="minlength">
+        <i class="ion-information-circled"></i>
+        Add some more characters to satisfy Minimum length of this field !
+    </div>
+    <div class="error" ng-message="maxlength">
+        <i class="ion-information-circled"></i>
+        Delete some characters to satisfy Maximum length of this field!
+    </div>
+</script>

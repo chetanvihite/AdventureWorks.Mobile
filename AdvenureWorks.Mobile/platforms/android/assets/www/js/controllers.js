@@ -3,7 +3,22 @@ angular.module('adventureWorksApp.controllers', [])
 .controller('DashCtrl', function ($scope) { })
 
 .controller('signupCtrl', function ($scope) { })
-.controller('forgotPasswordCtrl', function ($scope) { })
+.controller('forgotPasswordCtrl', function ($scope) {
+    $scope.signupForm = {
+        firstName: '',
+        lastName: '',
+        mobileNumber: '',
+        emailAddress: '',
+        password: '',
+        confirmPassword: '',
+        addressline1: '',
+        addressline2: '',
+        city: '',
+        state: '',
+        zip: ''
+
+    };
+})
 
 .controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state) {
     $scope.authorization = {
