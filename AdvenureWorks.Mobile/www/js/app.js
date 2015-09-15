@@ -41,6 +41,12 @@ angular.module('adventureWorksApp', ['ionic', 'adventureWorksApp.controllers', '
          controller: 'signupCtrl'
      }
      )
+     .state('/orderconfirm', {
+         url: '/orderconfirm',
+            templateUrl: 'templates/order-confirm.html',
+            controller: 'orderConfirmCtrl'
+        }
+     )
      .state('/forgot-password', {
          url: '/forgot-password',
          templateUrl: 'templates/forgot-password.html',

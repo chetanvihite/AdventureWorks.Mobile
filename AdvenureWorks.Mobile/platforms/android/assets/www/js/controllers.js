@@ -1,6 +1,6 @@
 angular.module('adventureWorksApp.controllers', [])
 
-.controller('DashCtrl', function ($scope) {
+.controller('DashCtrl', function ($scope, $state) {
     $scope.orderPref = {
         clientName: 'Chetan Vihite',
         addressline1: 'A 403, Leisure Apts',
@@ -8,9 +8,16 @@ angular.module('adventureWorksApp.controllers', [])
         city: 'Pune',
         state: 'Maharashtra'
     };
+    $scope.submitOrder = function (form) {
+        $state.go('/orderconfirm');
+        //if (form.$valid) {
+        //    // perform the validation here
+        //    $state.go('tab.dash');
+        //}
+    };
 
 })
-
+.controller('orderConfirmCtrl', function ($scope) { })
 .controller('signupCtrl', function ($scope) { })
 .controller('forgotPasswordCtrl', function ($scope) {
     $scope.signupForm = {
