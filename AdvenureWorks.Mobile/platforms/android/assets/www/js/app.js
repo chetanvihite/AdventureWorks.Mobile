@@ -5,7 +5,10 @@
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
 angular.module('adventureWorksApp', ['ionic', 'adventureWorksApp.controllers', 'adventureWorksApp.services', 'ngMessages'])
-
+.constant('SERVER', {
+    //url: 'https://myextsite.com/api/public/index.php/v1'
+    url: 'http://adventureworksmobile.azurewebsites.net/Mobileservice/'
+})
 .run(function ($ionicPlatform) {
     $ionicPlatform.ready(function () {
         // Hide the accessory bar by default (remove this to show the accessory bar above the keyboard

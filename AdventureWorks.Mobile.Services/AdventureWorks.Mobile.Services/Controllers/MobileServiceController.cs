@@ -22,26 +22,41 @@ namespace AdventureWorks.Mobile.Services.Controllers
             return "working fine";
         }
 
-        [HttpGet]
-        [Route("Authenticate/{mobileNumber}/{password}")]
-        public JsonResult Authenticate(decimal mobileNumber, string password)
+        [HttpPost]
+        [Route("Authenticate")]
+        public JsonResult Authenticate(AuthenticationRequest request)
         {
-            var result = new DbConnector().Authenticate(mobileNumber, password);
+            var result = new DbConnector().Authenticate(request.MobileNumber, request.Password);
 
             return Json(result, JsonRequestBehavior.AllowGet);
         }
+
+        //[HttpGet]
+        //[Route("Authenticate/{mobileNumber}/{password}")]
+        //public JsonResult Authenticate(decimal mobileNumber, string password)
+        //{
+        //    var result = new DbConnector().Authenticate(mobileNumber, password);
+
+        //    return Json(result, JsonRequestBehavior.AllowGet);
+        //}
+
         [HttpGet]
+        [Route("Profile/{userId}")]
         public UserProfile GetProfile(decimal userId)
         {
             return new DbConnector().GetProfile(userId);
         }
-        [HttpGet]
+
+        [HttpPost]
+        [Route("Signup/{mobileNumber}/{password}/{profile}")]
         public string Signup(decimal mobileNumber, string password, UserProfile profile)
         {
 
             return "success";
         }
-        [HttpGet]
+
+        [HttpPost]
+        [Route("SubmitOrder/{mobileNumber}/{order}")]
         public OrderConfirmation SubmitOrder(decimal mobileNumber, Order order)
         {
 
