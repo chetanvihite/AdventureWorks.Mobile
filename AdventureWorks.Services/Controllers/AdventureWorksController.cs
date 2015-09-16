@@ -3,17 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Mvc;
+using AdventureWorks.Services._001_Domain;
 
 namespace AdventureWorks.Services.Controllers
 {
     [Route("api/[controller]")]
-    public class ValuesController : Controller
+    public class AdventureWorksController : Controller
     {
         // GET: api/values
         [HttpGet]
-        public IEnumerable<string> Get()
+        public AuthenticationResult Authenticate(decimal mobileNumber, string password)
         {
-            return new string[] { "value1", "value2" };
+            return new AuthenticationResult();
         }
 
         // GET api/values/5
