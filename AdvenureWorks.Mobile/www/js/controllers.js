@@ -64,6 +64,8 @@ angular.module('adventureWorksApp.controllers', [])
             //    title: 'alert',
             //    template: $scope.authorization.username
             //});
+            $scope.data = { isLoading: true};
+           
             $scope.authorization.errorMessage = '';
             var result = mobileServiceFactory.authenticate($scope.authorization.username, $scope.authorization.password)
             .success(function (response) {
@@ -74,16 +76,13 @@ angular.module('adventureWorksApp.controllers', [])
                 
                     $scope.authorization.errorMessage = response.ErrorMessage;
                 }            
-               
+                $scope.data = { isLoading: false };
             })
             .error(function (error) {
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Don\'t eat that!',
-                    template: error.message
-                });
-
+                $scope.authorization.errorMessage = error.message;
+                $scope.data = { isLoading: false };
             });
-
+           
             
         }
     };

@@ -96,5 +96,17 @@ namespace AdventureWorks.Mobile.Services._002_Infra
             return result;
 
         }
+
+        internal void SubmitOrder(Order order)
+        {
+            using (var connection = new SqlConnection(_connectionstring))
+            {
+                var query = string.Format($"insert into orders(mobilenumber, DeliveryType, OrderType, PickupSchedule, streetaddress, landmark, city, state, pincode, order_date, OrderStatus, PickupDate, CompletionDate, DeliveryDate, ItemsCount) values({order.MobileNumber }, {order.DeliveryType} , {order.OrderType }, {order.PickupSchedule} , {order.StreetAddress}, {order.Landmark} , {order.City}, {order.State}, {order.Pincode},  getdate(), 'Submitted', null, null, null, null)");
+
+                var command = new SqlCommand(query, connection);
+
+                command.ExecuteNonQuery();
+            }
+        }
     }
 }

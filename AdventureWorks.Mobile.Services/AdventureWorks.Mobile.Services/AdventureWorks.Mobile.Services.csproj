@@ -39,6 +39,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.5.0.6\lib\net45\Newtonsoft.Json.dll</HintPath>
@@ -113,10 +121,19 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="001-Domain\AuthenticationResult.cs" />
+    <Compile Include="001-Domain\BaseEntity.cs" />
     <Compile Include="001-Domain\Order.cs" />
     <Compile Include="001-Domain\OrderConfirmation.cs" />
     <Compile Include="001-Domain\UserProfile.cs" />
     <Compile Include="002-Infra\DbConnector.cs" />
+    <Compile Include="002-Infra\EF\BaseRepository.cs" />
+    <Compile Include="002-Infra\EF\BaseUnitOfWork.cs" />
+    <Compile Include="002-Infra\EF\IQueryableUnitOfWork.cs" />
+    <Compile Include="002-Infra\EF\IRepository.cs" />
+    <Compile Include="002-Infra\EF\IunitOfWork.cs" />
+    <Compile Include="002-Infra\EF\MainUnitOfWork.cs" />
+    <Compile Include="002-Infra\EF\Mappings\OrdersMap.cs" />
+    <Compile Include="002-Infra\OrdersRepository.cs" />
     <Compile Include="002-Infra\Repository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />

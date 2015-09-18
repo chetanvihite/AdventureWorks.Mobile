@@ -56,10 +56,11 @@ namespace AdventureWorks.Mobile.Services.Controllers
         }
 
         [HttpPost]
-        [Route("SubmitOrder/{mobileNumber}/{order}")]
-        public OrderConfirmation SubmitOrder(decimal mobileNumber, Order order)
+        [Route("SubmitOrder")]
+        public OrderConfirmation SubmitOrder(Order order)
         {
 
+            new Repository().SubmitOrder(order);
 
             return new OrderConfirmation();
         }

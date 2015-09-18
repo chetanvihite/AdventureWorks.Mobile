@@ -46,6 +46,10 @@
 </style>
 
 <ion-view view-title="Login" >
+    <div class="bar bar-loading bar-assertive" ng-if="data.isLoading">
+        Loading...
+    </div>
+
     <div class="background-image"></div>
     <ion-content class="padding">
         <div >

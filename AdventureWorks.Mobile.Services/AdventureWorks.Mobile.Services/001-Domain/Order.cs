@@ -1,15 +1,30 @@
 ﻿
 
 using System;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace AdventureWorks.Mobile.Services._001_Domain
 {
-    public class Order
+    public class OrderDetails
     {
+        public decimal OrderNumber { get; set; }
+
+        public int Shirts { get; set; }
+        public int Trousers { get; set; }
+        public int TShirts { get; set; }
+        public int Sheets { get; set; }
+
+        public int Sarees { get; set; }
+
+    }
+    public class Order : BaseEntity
+    {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        public decimal MobileNumber { get; set; }
         public decimal OrderNumber { get; set; }
         public string DeliveryType { get; set; } // order type , standard/expedite/premium
         public string OrderType { get; set; } //ironing/washing+iron/dry clean
-        public string PickupSchedule { get; set; } //morning/afternoon/evening/laterevening
+        public int PickupSchedule { get; set; } //morning/afternoon/evening/laterevening
 
         public string StreetAddress { get; set; }
         public string Landmark { get; set; }
