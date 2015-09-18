@@ -77,7 +77,19 @@ namespace AdventureWorks.Mobile.Services._002_Infra
                             result.Profile.UserName = string.Format("{0} {1}", data.AsString("firstname"),
                                                                     data.AsString("lastname"));
                         }
+                        else
+                        {
+                            result.ErrorMessage = "Login Failure: Either the Mobile Number or Password is Incorrect.";
+                        }
                     }
+                    else
+                    {
+                        result.ErrorMessage = "Login Failure: Either the Mobile Number or Password is Incorrect.";
+                    }
+                }
+                else
+                {
+                    result.ErrorMessage = "Login Failure: Either the Mobile Number or Password is Incorrect.";
                 }
             }
             

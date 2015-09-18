@@ -73,7 +73,12 @@
                     <div class="error-container last-error-container" ng-show="authorizationForm.password.$error && authorizationForm.$submitted" ng-messages="authorizationForm.password.$error">
                         <div ng-messages-include="error-list.html"></div>
                     </div>
-
+                    <div ng-show="authorization.errorMessage.length > 0">
+                        <br />
+                        <h4 style="color:red">
+                            <span class="button-assertive" ng-model="authorization.errorMesssage">{{authorization.errorMessage}}</span>
+                        </h4>
+                    </div>
                 </div>
                 <div>
                     <button class="button button-full button-positive" type="submit">

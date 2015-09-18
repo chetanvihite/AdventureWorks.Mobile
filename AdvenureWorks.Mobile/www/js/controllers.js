@@ -7,7 +7,6 @@ angular.module('adventureWorksApp.controllers', [])
     {
         var authData = { mobileNumber: mobileNumber, password: password };
 
-        //return $http.get('http://adventureworksmobile.azurewebsites.net/Mobileservice/Authenticate/8554983722/cvihite123', authData);
         return $http.post('http://adventureworksmobile.azurewebsites.net/Mobileservice/Authenticate', authData);
     }
 
@@ -53,24 +52,29 @@ angular.module('adventureWorksApp.controllers', [])
 .controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state, mobileServiceFactory) {
     $scope.authorization = {
         username: '',
-        password: ''
+        password: '',
+        errorMessage: ''
     };
 
     $scope.signIn = function (form) {
         //$state.go('tab.dash');
         if (form.$valid) {
             //// perform the validation here
-            var alertPopup = $ionicPopup.alert({
-                title: 'alert',
-                template: $scope.authorization.username
-            });
+            //var alertPopup = $ionicPopup.alert({
+            //    title: 'alert',
+            //    template: $scope.authorization.username
+            //});
+            $scope.authorization.errorMessage = '';
             var result = mobileServiceFactory.authenticate($scope.authorization.username, $scope.authorization.password)
             .success(function (response) {
-                var alertPopup = $ionicPopup.alert({
-                    title: 'Don\'t eat that!',
-                    template: response.IsSuccess
-                });
-                $state.go('tab.dash');
+                if (response.IsSuccess == true) {
+                    $state.go('tab.dash');
+                }
+                else {
+                
+                    $scope.authorization.errorMessage = response.ErrorMessage;
+                }            
+               
             })
             .error(function (error) {
                 var alertPopup = $ionicPopup.alert({
