@@ -164,6 +164,7 @@
     </None>
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="002-Infra\Interfaces\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
