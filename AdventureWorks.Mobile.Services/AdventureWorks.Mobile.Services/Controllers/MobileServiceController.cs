@@ -3,6 +3,8 @@
 
 using AdventureWorks.Mobile.Services._001_Domain;
 using AdventureWorks.Mobile.Services._002_Infra;
+using System;
+using System.Configuration;
 using System.Web.Mvc;
 
 namespace AdventureWorks.Mobile.Services.Controllers
@@ -10,6 +12,12 @@ namespace AdventureWorks.Mobile.Services.Controllers
     [RoutePrefix("MobileService")]
     public class MobileServiceController : Controller
     {
+        IOrdersRepository repository;
+
+        public MobileServiceController()
+        {
+            repository = new OrdersRepository(new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
+        }
         // GET: MobileService
         public ActionResult Index()
         {
@@ -31,15 +39,6 @@ namespace AdventureWorks.Mobile.Services.Controllers
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        //[HttpGet]
-        //[Route("Authenticate/{mobileNumber}/{password}")]
-        //public JsonResult Authenticate(decimal mobileNumber, string password)
-        //{
-        //    var result = new DbConnector().Authenticate(mobileNumber, password);
-
-        //    return Json(result, JsonRequestBehavior.AllowGet);
-        //}
-
         [HttpGet]
         [Route("Profile/{userId}")]
         public UserProfile GetProfile(decimal userId)
@@ -57,12 +56,48 @@ namespace AdventureWorks.Mobile.Services.Controllers
 
         [HttpPost]
         [Route("SubmitOrder")]
-        public OrderConfirmation SubmitOrder(Order order)
+        public JsonResult SubmitOrder(Order order)
         {
+            var response = new Response();
+            try
+            {
+                repository.SubmitOrder(order);
+               
+                response.IsSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = exception.Message;
 
-            new Repository().SubmitOrder(order);
+                throw;
+            }           
 
-            return new OrderConfirmation();
+            return Json("success", JsonRequestBehavior.AllowGet);
+        }
+
+        [HttpPost]
+        [Route("UpdateOrder")]
+        public JsonResult UpdateOrder(Order newOrder)
+        {
+            var response = new Response();
+            try
+            {
+                var oldOrder = repository.GetOrder(newOrder.OrderNumber);
+                
+                repository.UpdateOrder(oldOrder, newOrder);
+
+                response.IsSuccess = true;
+            }
+            catch (Exception exception)
+            {
+                response.IsSuccess = false;
+                response.ErrorMessage = exception.Message;
+
+                throw;
+            }
+
+            return Json("success", JsonRequestBehavior.AllowGet);
         }
     }
 }
