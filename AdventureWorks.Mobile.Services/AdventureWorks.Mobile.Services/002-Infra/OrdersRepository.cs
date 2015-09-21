@@ -1,6 +1,7 @@
 ﻿
 using System;
 using AdventureWorks.Mobile.Services._001_Domain;
+using System.Linq;
 
 namespace AdventureWorks.Mobile.Services._002_Infra
 {
@@ -30,6 +31,16 @@ namespace AdventureWorks.Mobile.Services._002_Infra
             currentUnitOfWork.Orders.Add(order);
 
             currentUnitOfWork.SaveChanges();
+        }
+
+        public OrderNumberHolder GetNextOrderNumber()
+        {
+            var currentUnitOfWork = UnitOfWork as MainUnitOfWork;
+            if (currentUnitOfWork == null) return null;
+
+            var result = currentUnitOfWork.ExecuteQuery<OrderNumberHolder>("select NEXT VALUE FOR orderssequence as [NEXTVAL]");
+
+            return result.FirstOrDefault();
         }
     }
 }

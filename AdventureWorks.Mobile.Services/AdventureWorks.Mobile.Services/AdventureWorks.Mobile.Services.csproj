@@ -124,6 +124,7 @@
     <Compile Include="001-Domain\BaseEntity.cs" />
     <Compile Include="001-Domain\Order.cs" />
     <Compile Include="001-Domain\OrderConfirmation.cs" />
+    <Compile Include="001-Domain\OrderNumberHolder.cs" />
     <Compile Include="001-Domain\UserProfile.cs" />
     <Compile Include="002-Infra\DbConnector.cs" />
     <Compile Include="002-Infra\EF\BaseRepository.cs" />

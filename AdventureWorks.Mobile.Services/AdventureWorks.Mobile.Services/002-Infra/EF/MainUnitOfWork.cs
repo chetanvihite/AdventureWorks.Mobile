@@ -3,6 +3,7 @@ using AdventureWorks.Mobile.Services._002_Infra.EF.Mappings;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.Entity;
+using System.Data.Entity.Core.Metadata.Edm;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using System.Linq;
@@ -94,7 +95,7 @@ namespace AdventureWorks.Mobile.Services._002_Infra
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-            
+            Database.SetInitializer<MainUnitOfWork>(null);
 
             modelBuilder.Configurations.Add(new OrdersMap());
             

@@ -11,7 +11,7 @@ namespace AdventureWorks.Mobile.Services._002_Infra.EF.Mappings
     {
         public OrdersMap()
         {
-            ToTable("ORDERS", "ADVENTUREWORKS.DB");
+            ToTable("ORDERS", "DBO");
 
             HasKey(x => new { x.OrderNumber });
 
@@ -28,9 +28,9 @@ namespace AdventureWorks.Mobile.Services._002_Infra.EF.Mappings
 
             Property(x => x.OrderDate).HasColumnName("ORDER_DATE");
             Property(x => x.OrderStatus).HasColumnName("ORDERSTATUS");
-            Property(x => x.PickupDate).HasColumnName("PICKUPDATE");
-            Property(x => x.CompletionDate).HasColumnName("COMPLETIONDATE");
-            Property(x => x.DeliveryDate).HasColumnName("DELIVERYDATE");
+            Property(x => x.PickupDate).HasColumnName("PICKUPDATE").IsOptional();
+            Property(x => x.CompletionDate).HasColumnName("COMPLETIONDATE").IsOptional();
+            Property(x => x.DeliveryDate).HasColumnName("DELIVERYDATE").IsOptional();
             Property(x => x.ItemsCount).HasColumnName("ITEMSCOUNT");
 
         }

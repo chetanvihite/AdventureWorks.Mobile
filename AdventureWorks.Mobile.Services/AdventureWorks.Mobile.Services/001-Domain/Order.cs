@@ -20,11 +20,12 @@ namespace AdventureWorks.Mobile.Services._001_Domain
     public class Order : BaseEntity
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public decimal MobileNumber { get; set; }
         public decimal OrderNumber { get; set; }
+
+        public decimal MobileNumber { get; set; }
         public string DeliveryType { get; set; } // order type , standard/expedite/premium
         public string OrderType { get; set; } //ironing/washing+iron/dry clean
-        public int PickupSchedule { get; set; } //morning/afternoon/evening/laterevening
+        public int PickupSchedule { get; set; } //morning/afternoon/evening/later evening
 
         public string StreetAddress { get; set; }
         public string Landmark { get; set; }
@@ -34,9 +35,9 @@ namespace AdventureWorks.Mobile.Services._001_Domain
 
         public DateTime OrderDate { get; set; }
         public string OrderStatus { get; set; }
-        public DateTime PickupDate { get; set; }
-        public DateTime CompletionDate { get; set; }
-        public DateTime DeliveryDate { get; set; }
+        public DateTime? PickupDate { get; set; }
+        public DateTime? CompletionDate { get; set; } 
+        public DateTime? DeliveryDate { get; set; }
 
         public int ItemsCount { get; set; } //# of items
 
