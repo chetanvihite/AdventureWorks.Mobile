@@ -12,56 +12,57 @@ namespace AdventureWorks.Mobile.Services.Controllers
     [RoutePrefix("MobileService")]
     public class MobileServiceController : Controller
     {
-        IOrdersRepository repository;
+        IOrdersRepository ordersRepository;
+        IUsersRepository usersRepository;
 
         public MobileServiceController()
         {
-            repository = new OrdersRepository(new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
-        }
-        // GET: MobileService
-        public ActionResult Index()
-        {
-            return View();
+            ordersRepository = new OrdersRepository(new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
+            usersRepository = new UsersRepository(new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
         }
 
-        [HttpGet]
-        public string Test()
-        {
-            return "working fine";
-        }
-
+      
         [HttpPost]
         [Route("Authenticate")]
         public JsonResult Authenticate(AuthenticationRequest request)
         {
-            var result = new DbConnector().Authenticate(request.MobileNumber, request.Password);
-
+            var result = new AuthenticationResult();
+        
+            var userProfile = usersRepository.Authenticate(request.MobileNumber, request.Password);
+            if (userProfile == null)
+            {
+                result.IsSuccess = false;
+                result.ErrorMessage = "Login Failure: Either the Mobile Number or Password is Incorrect.";
+            }
+            else
+            {
+                result.IsSuccess = true;
+                result.Profile = userProfile;
+            }
             return Json(result, JsonRequestBehavior.AllowGet);
         }
 
-        [HttpGet]
-        [Route("Profile/{userId}")]
-        public UserProfile GetProfile(decimal userId)
-        {
-            return new DbConnector().GetProfile(userId);
-        }
+        
 
         [HttpPost]
-        [Route("Signup/{mobileNumber}/{password}/{profile}")]
-        public string Signup(decimal mobileNumber, string password, UserProfile profile)
+        [Route("Signup")]
+        public JsonResult Signup(User user)
         {
+            usersRepository.Signup(user);
 
-            return "success";
+            var response = new BaseResponse() { IsSuccess = true };
+
+            return Json(response, JsonRequestBehavior.AllowGet);
         }
 
         [HttpPost]
         [Route("SubmitOrder")]
         public JsonResult SubmitOrder(Order order)
         {
-            var response = new Response();
+            var response = new BaseResponse();
             try
             {
-                repository.SubmitOrder(order);
+                ordersRepository.SubmitOrder(order);
                
                 response.IsSuccess = true;
             }
@@ -69,8 +70,6 @@ namespace AdventureWorks.Mobile.Services.Controllers
             {
                 response.IsSuccess = false;
                 response.ErrorMessage = exception.Message;
-
-                throw;
             }           
 
             return Json("success", JsonRequestBehavior.AllowGet);
@@ -80,12 +79,12 @@ namespace AdventureWorks.Mobile.Services.Controllers
         [Route("UpdateOrder")]
         public JsonResult UpdateOrder(Order newOrder)
         {
-            var response = new Response();
+            var response = new BaseResponse();
             try
             {
-                var oldOrder = repository.GetOrder(newOrder.OrderNumber);
-                
-                repository.UpdateOrder(oldOrder, newOrder);
+                var oldOrder = ordersRepository.GetOrder(newOrder.OrderNumber);
+
+                ordersRepository.UpdateOrder(oldOrder, newOrder);
 
                 response.IsSuccess = true;
             }
@@ -93,11 +92,16 @@ namespace AdventureWorks.Mobile.Services.Controllers
             {
                 response.IsSuccess = false;
                 response.ErrorMessage = exception.Message;
-
-                throw;
             }
 
             return Json("success", JsonRequestBehavior.AllowGet);
         }
+
+        [HttpGet]
+        public string Test()
+        {
+            return "working fine";
+        }
+
     }
 }

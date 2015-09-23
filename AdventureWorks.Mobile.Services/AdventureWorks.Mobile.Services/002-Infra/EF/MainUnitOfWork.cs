@@ -23,7 +23,7 @@ namespace AdventureWorks.Mobile.Services._002_Infra
         #region IDbSet Members
         
         public IDbSet<Order> Orders { get; set; }
-     
+        public IDbSet<User> Users { get; set; }
         #endregion
 
         #region IQueryableUnitOfWork Members
@@ -98,7 +98,7 @@ namespace AdventureWorks.Mobile.Services._002_Infra
             Database.SetInitializer<MainUnitOfWork>(null);
 
             modelBuilder.Configurations.Add(new OrdersMap());
-            
+            modelBuilder.Configurations.Add(new UserMap());
         }
     }
 }

@@ -5,15 +5,8 @@ using System.Web;
 
 namespace AdventureWorks.Mobile.Services._001_Domain
 {
-    public class AuthenticationResult
+    public class AuthenticationResult : BaseResponse
     {
-        public bool IsSuccess { get; set; }
-
-        public string SessionKey { get; set; }
-
-        public string ErrorMessage { get; set; }
-        public string ErrorCode { get; set; }
-
-        public UserProfile Profile { get; set; }
+        public User Profile { get; set; }
     }
 }

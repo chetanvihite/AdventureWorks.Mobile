@@ -126,17 +126,18 @@
     <Compile Include="001-Domain\OrderConfirmation.cs" />
     <Compile Include="001-Domain\OrderNumberHolder.cs" />
     <Compile Include="001-Domain\Response.cs" />
-    <Compile Include="001-Domain\UserProfile.cs" />
+    <Compile Include="001-Domain\User.cs" />
     <Compile Include="002-Infra\DbConnector.cs" />
     <Compile Include="002-Infra\EF\BaseRepository.cs" />
     <Compile Include="002-Infra\EF\BaseUnitOfWork.cs" />
-    <Compile Include="002-Infra\EF\IQueryableUnitOfWork.cs" />
-    <Compile Include="002-Infra\EF\IRepository.cs" />
-    <Compile Include="002-Infra\EF\IunitOfWork.cs" />
+    <Compile Include="002-Infra\EF\Mappings\UserMap.cs" />
+    <Compile Include="002-Infra\Interfaces\IQueryableUnitOfWork.cs" />
+    <Compile Include="002-Infra\Interfaces\IRepository.cs" />
+    <Compile Include="002-Infra\Interfaces\IunitOfWork.cs" />
     <Compile Include="002-Infra\EF\MainUnitOfWork.cs" />
     <Compile Include="002-Infra\EF\Mappings\OrdersMap.cs" />
-    <Compile Include="002-Infra\OrdersRepository.cs" />
-    <Compile Include="002-Infra\Repository.cs" />
+    <Compile Include="002-Infra\Repositories\OrdersRepository.cs" />
+    <Compile Include="002-Infra\Repositories\UsersRepository.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="001-Domain\AuthenticationRequest.cs" />
@@ -166,7 +167,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="002-Infra\Interfaces\" />
     <Folder Include="App_Data\" />
     <Folder Include="Models\" />
   </ItemGroup>
