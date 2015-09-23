@@ -37,6 +37,38 @@ namespace Services.Tests
         }
 
         [TestMethod]
+        public void Authenticate()
+        {
+            var usersRepository = new UsersRepository(new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
+
+            var request = new AuthenticationRequest();
+            var result = usersRepository.Authenticate(9822559890, "test123");
+            Assert.IsNotNull(result);           
+
+        }
+        [TestMethod]
+        public void Test_Signup()
+        {
+            var usersRepository = new UsersRepository(new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
+
+            var user = new User()
+            {
+                MobileNumber = 8554983722,
+                Password = "cvihite123",
+                StreetAddress = "A-403 Leisure Apts, Bavdhan",
+                Landmark = "Behind Maratha Mandir",
+                City = "Pune",
+                State = "MH",
+                Pincode = 411021,
+                EmailAddress = "cvihite@gmail.com",
+                FirstName = "chetan",
+                LastName = "vihite",
+                CreatedDate = DateTime.Now
+            };
+
+            usersRepository.Signup(user);
+        }
+        [TestMethod]
         public void Get_Next_order_number()
         {
             var repository = new OrdersRepository(
