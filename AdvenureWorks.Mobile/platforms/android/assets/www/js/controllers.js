@@ -9,6 +9,10 @@ angular.module('adventureWorksApp.controllers', [])
 
         return $http.post('http://adventureworksmobile.azurewebsites.net/Mobileservice/Authenticate', authData);
     }
+    factory.signup = function (model)
+    {
+        return $http.post('http://adventureworksmobile.azurewebsites.net/Mobileservice/Signup', model);
+    }
 
         return factory;
 })
@@ -31,9 +35,8 @@ angular.module('adventureWorksApp.controllers', [])
 
 })
 .controller('orderConfirmCtrl', function ($scope) { })
-.controller('signupCtrl', function ($scope) { })
-.controller('forgotPasswordCtrl', function ($scope) {
-    $scope.signupForm = {
+.controller('signupCtrl', function ($scope, $ionicPopup, $timeout, $state, mobileServiceFactory) {
+    $scope.signup = {
         firstName: '',
         lastName: '',
         mobileNumber: '',
@@ -45,8 +48,53 @@ angular.module('adventureWorksApp.controllers', [])
         city: '',
         state: '',
         zip: ''
-
     };
+
+    
+    $scope.signupsubmit = function (form) {
+        if (form.$valid) {
+            
+            var model = {
+                  FirstName: $scope.signup.firstName, 
+                  LastName: $scope.signup.lastName, 
+                  MobileNumber : $scope.signup.mobileNumber,
+                  Password : $scope.signup.password,
+                  EmailAddress: $scope.signup.emailAddress,
+                  StreetAddress: $scope.signup.addressline1, 
+                  Landmark: $scope.signup.addressline2,
+                  City: $scope.signup.city, 
+                  State : $scope.signup.state,
+                Pincode: $scope.signup.zip 
+            };
+            if ($scope.signup.password != $scope.signup.confirmPassword) {
+                $scope.signup.errorMessage = 'entered password do not match confirm password';
+                $scope.signup.password = '';
+                $scope.signup.confirmPassword = '';
+                return;
+            }
+            $scope.data = { isLoading: true };
+            var result = mobileServiceFactory.signup(model)
+            .success(function (response) {
+                if (response.IsSuccess == true) {
+                    var alertPopup = $ionicPopup.alert({
+                        title: 'Welcome',
+                        template: 'Congratulations! Your account has been created successfully. Login to LaundryPro to get started!'
+                    });
+                    $state.go('/login');
+                }
+                else {
+                    $scope.signup.errorMessage = response.ErrorMessage;
+                }
+                $scope.data = { isLoading: false };
+            })
+            .error(function (error) {
+                $scope.signup.errorMessage = error.message;
+                $scope.data = { isLoading: false };
+            });
+        }
+    };
+})
+.controller('forgotPasswordCtrl', function ($scope) {   
 })
 
 .controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state, mobileServiceFactory) {
@@ -70,7 +118,8 @@ angular.module('adventureWorksApp.controllers', [])
             var result = mobileServiceFactory.authenticate($scope.authorization.username, $scope.authorization.password)
             .success(function (response) {
                 if (response.IsSuccess == true) {
-                    $state.go('tab.dash');
+                   
+                    $state.go('tab-dash');
                 }
                 else {
                 

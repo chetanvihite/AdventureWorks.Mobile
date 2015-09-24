@@ -16,8 +16,8 @@ namespace AdventureWorks.Mobile.Services._001_Domain
         public decimal MobileNumber { get; set; }
 
         public string Password { get; set; }
-       
-        public string Active { get; set; }
+
+        public string Active { get; set; } = "Y";
 
         public string EmailAddress { get; set; }
 
@@ -27,7 +27,7 @@ namespace AdventureWorks.Mobile.Services._001_Domain
         public string State { get; set; }
         public Int64? Pincode { get; set; }
 
-        public DateTime CreatedDate { get; set; }
-        public DateTime? LastUpdated { get; set; }
+        public DateTime CreatedDate { get; set; } = DateTime.Now;
+        public DateTime? LastUpdated { get; set; } = DateTime.Now;
     }
 }

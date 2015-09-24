@@ -14,8 +14,8 @@
     <splash density="port-mdpi" src="res/screens/android/screen-mdpi-portrait.png" />
     <splash density="port-xhdpi" src="res/screens/android/screen-xhdpi-portrait.png" />
     <name>AdvenureWorks.Mobile</name>
-    <description>A blank project that uses Apache Cordova to help you build an app that targets multiple mobile platforms: Android, iOS, Windows, and Windows Phone.</description>
-    <author email="dev@cordova.apache.org" href="http://cordova.io">Apache Cordova Team </author>
+    <description>LaudryPro </description>
+    <author email="dev@cordova.apache.org" href="http://cordova.io">Chetan Vihite Inc</author>
     <content src="index.html" />
     <access origin="*" />
     <vs:features />

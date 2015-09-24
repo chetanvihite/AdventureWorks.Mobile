@@ -43,9 +43,9 @@ namespace Services.Tests
 
             var request = new AuthenticationRequest();
             var result = usersRepository.Authenticate(9822559890, "test123");
-            Assert.IsNotNull(result);           
-
+            Assert.IsNotNull(result);
         }
+
         [TestMethod]
         public void Test_Signup()
         {
@@ -75,8 +75,8 @@ namespace Services.Tests
                 new MainUnitOfWork(ConfigurationManager.AppSettings["AzureConnectionString"]));
 
             var result = repository.GetNextOrderNumber();
-            Assert.IsNotNull(result);
 
+            Assert.IsNotNull(result);
         }
 
     }
