@@ -1,7 +1,7 @@
 <ion-view view-title="Dashboard">
   <ion-content class="padding">
       <div class="list card">
-          <div class="item item-divider">Place an Order</div>
+          <div class="item item-divider positive">Place an Order</div>
           <div>
               <form name="orderForm" novalidate="" ng-submit="submitOrder(orderForm)">
                   <div class="item item-body">
@@ -43,7 +43,7 @@
                           <div ng-messages-include="error-list.html"></div>
                       </div>
 
-                      <label class="item item-input" ng-class="{ 'has-errors' : orderForm.state.$invalid && orderForm.$submitted, 'no-errors' : orderForm.state.$valid  && orderForm.$submitted}">
+                      <!--<label class="item item-input" ng-class="{ 'has-errors' : orderForm.state.$invalid && orderForm.$submitted, 'no-errors' : orderForm.state.$valid  && orderForm.$submitted}">
                           <span class="input-label"><span class="assertive">*</span> State:</span>
                           <input type="text" name="state" ng-model="orderPref.state" ng-minlength="1" ng-maxlength="50" required>
                       </label>
@@ -57,7 +57,7 @@
                       </label>
                       <div class="error-container last-error-container" ng-show="orderForm.zip.$error && orderForm.$submitted" ng-messages="orderForm.zip.$error">
                           <div ng-messages-include="error-list.html"></div>
-                      </div>
+                      </div>-->
 
                                          
                       <div>

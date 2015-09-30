@@ -14,17 +14,35 @@ angular.module('adventureWorksApp.controllers', [])
         return $http.post('http://adventureworksmobile.azurewebsites.net/Mobileservice/Signup', model);
     }
 
-        return factory;
+    return factory;
 })
+.service('mobileService', function () {
+    var userProfile = {};
 
-.controller('DashCtrl', function ($scope, $state) {
-    $scope.orderPref = {
-        clientName: 'Chetan Vihite',
-        addressline1: 'A 403, Leisure Apts',
-        addressline2: 'behind maratha mandir',
-        city: 'Pune',
-        state: 'Maharashtra'
+    var addUserProfile = function (profile) {
+        userProfile = profile;
+    }
+
+    var getUserProfile = function () {
+        return userProfile;
+    }
+
+    return {
+        addUserProfile: addUserProfile,
+        getUserProfile: getUserProfile
     };
+}
+)
+.controller('DashCtrl', function ($scope, $state, mobileService) {
+    var userProfile = mobileService.getUserProfile();
+
+    $scope.orderPref = {        
+        clientName: userProfile.FirstName +', ' + userProfile.LastName,
+        addressline1: userProfile.StreetAddress,
+        addressline2: userProfile.Landmark,
+        city: userProfile.City
+    };
+
     $scope.submitOrder = function (form) {
         $state.go('/orderconfirm');
         //if (form.$valid) {
@@ -45,9 +63,9 @@ angular.module('adventureWorksApp.controllers', [])
         confirmPassword: '',
         addressline1: '',
         addressline2: '',
-        city: '',
-        state: '',
-        zip: ''
+        city: ''
+        //state: '',
+        //zip: ''
     };
 
     
@@ -62,9 +80,9 @@ angular.module('adventureWorksApp.controllers', [])
                   EmailAddress: $scope.signup.emailAddress,
                   StreetAddress: $scope.signup.addressline1, 
                   Landmark: $scope.signup.addressline2,
-                  City: $scope.signup.city, 
-                  State : $scope.signup.state,
-                Pincode: $scope.signup.zip 
+                  City: $scope.signup.city 
+                //  State : $scope.signup.state,
+                //Pincode: $scope.signup.zip 
             };
             if ($scope.signup.password != $scope.signup.confirmPassword) {
                 $scope.signup.errorMessage = 'entered password do not match confirm password';
@@ -97,7 +115,7 @@ angular.module('adventureWorksApp.controllers', [])
 .controller('forgotPasswordCtrl', function ($scope) {   
 })
 
-.controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state, mobileServiceFactory) {
+.controller('loginCtrl', function ($scope, $ionicPopup, $timeout, $state, mobileServiceFactory, mobileService) {
     $scope.authorization = {
         username: '',
         password: '',
@@ -105,21 +123,17 @@ angular.module('adventureWorksApp.controllers', [])
     };
 
     $scope.signIn = function (form) {
-        //$state.go('tab.dash');
+        
         if (form.$valid) {
-            //// perform the validation here
-            //var alertPopup = $ionicPopup.alert({
-            //    title: 'alert',
-            //    template: $scope.authorization.username
-            //});
+
             $scope.data = { isLoading: true};
            
             $scope.authorization.errorMessage = '';
             var result = mobileServiceFactory.authenticate($scope.authorization.username, $scope.authorization.password)
             .success(function (response) {
                 if (response.IsSuccess == true) {
-                   
-                    $state.go('tab-dash');
+                    mobileService.addUserProfile(response.Profile);
+                    $state.go('tab.dash');
                 }
                 else {
                 

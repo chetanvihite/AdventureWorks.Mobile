@@ -39,6 +39,9 @@ namespace AdventureWorks.Mobile.Services._001_Domain
         public DateTime? CompletionDate { get; set; } 
         public DateTime? DeliveryDate { get; set; }
 
+        public string AssignedTo { get; set; }
+
+        public DateTime? AssignedDate { get; set; }
         public int ItemsCount { get; set; } //# of items
 
     }

@@ -33,6 +33,9 @@ namespace AdventureWorks.Mobile.Services._002_Infra.EF.Mappings
             Property(x => x.DeliveryDate).HasColumnName("DELIVERYDATE").IsOptional();
             Property(x => x.ItemsCount).HasColumnName("ITEMSCOUNT");
 
+            Property(x => x.AssignedTo).HasColumnName("ASSIGNEDTO");
+            Property(x => x.AssignedTo).HasColumnName("ASSIGNED_DATE");
+
         }
     }
 }
